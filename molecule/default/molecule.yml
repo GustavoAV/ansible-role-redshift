@@ -1,0 +1,16 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+platforms:
+  - name: ub20
+    box: ubuntu/focal64
+  - name: ub22
+    box: ubuntu/jammy64
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
