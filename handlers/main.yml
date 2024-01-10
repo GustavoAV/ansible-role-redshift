@@ -1,0 +1,7 @@
+---
+- name: Restart redshift
+  ansible.builtin.systemd:
+    name: "{{ redshift_svc_name }}"
+    state: restarted
+    scope: user
+    daemon_reload: true

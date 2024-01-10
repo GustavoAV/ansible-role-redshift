@@ -1,0 +1,31 @@
+---
+- name: Install redshift
+  ansible.builtin.apt:
+    name: redshift
+    state: present
+    update_cache: true
+    cache_valid_time: "3600"
+  become: true
+
+# Based on: https://linuxhandbook.com/create-systemd-services/
+
+- name: Create systemd user path
+  ansible.builtin.file:
+    path: "{{ ansible_facts['user_dir'] }}/.config/systemd/user"
+    mode: "0775"
+    state: directory
+
+- name: Create redshift service
+  ansible.builtin.template:
+    src: service.j2
+    dest: "{{ ansible_facts['user_dir'] }}/.config/systemd/user/{{ redshift_svc_name }}.service"
+    mode: "0644"
+  notify: Restart redshift
+
+- name: Start and enable redshift
+  ansible.builtin.systemd:
+    name: "{{ redshift_svc_name }}"
+    state: started
+    scope: user
+    enabled: true
+    daemon_reload: true

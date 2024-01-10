@@ -1,0 +1,13 @@
+[Unit]
+Description={{ redshift_svc_name }}
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+{# "-m dummy" allows redshift to work in test environments #}
+ExecStart={{ redshift_bin_path }} -l {{ redshift_provider }} -t {{ redshift_day_color_temperature }}:{{ redshift_night_color_temperature }}{% if molecule_environment %} -m dummy{% endif %}
+
+{# "WantedBy=multi-user.target" doesn't work (https://superuser.com/a/1028180) #}
+[Install]
+WantedBy=default.target

@@ -6,4 +6,4 @@
   tasks:
     - name: Include redshift
       ansible.builtin.include_role:
-        name: redshift
+        name: gustavoav.redshift

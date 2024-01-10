@@ -1,0 +1,7 @@
+---
+redshift_svc_name: redshift
+redshift_bin_path: /usr/bin/redshift
+
+redshift_provider: geoclue2
+redshift_day_color_temperature: 5500K
+redshift_night_color_temperature: 4500K

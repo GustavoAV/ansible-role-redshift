@@ -12,5 +12,9 @@ platforms:
     box: ubuntu/jammy64
 provisioner:
   name: ansible
+  inventory:
+    group_vars:
+      all:
+        molecule_environment: true
 verifier:
   name: ansible
